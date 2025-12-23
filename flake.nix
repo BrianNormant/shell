@@ -37,6 +37,9 @@
         app2unit = pkgs.callPackage ./nix/app2unit.nix {inherit pkgs;};
         caelestia-cli = inputs.caelestia-cli.packages.${pkgs.stdenv.hostPlatform.system}.default;
       };
+      qml-caelestia = pkgs.callPackage ./nix/qml-caelestia.nix {
+
+        };
       with-cli = caelestia-shell.override {withCli = true;};
       debug = caelestia-shell.override {debug = true;};
       default = caelestia-shell;
