@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 
+set(VERSION "2.1.2")
+
 if(NOT DEFINED VERSION)
     execute_process(COMMAND git describe --tags --abbrev=0
         WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
@@ -11,6 +13,8 @@ if(NOT DEFINED VERSION)
         message(FATAL_ERROR "VERSION is not set and failed to get from git")
     endif()
 endif()
+
+set(GIT_REVISION "rev")
 
 if(NOT DEFINED GIT_REVISION)
     execute_process(COMMAND git rev-parse HEAD

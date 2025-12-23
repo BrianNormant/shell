@@ -1,14 +1,17 @@
-{pkgs, ...}:
+{pkgs, lib, ...}:
 pkgs.stdenv.mkDerivation {
-  pname = "qml-caelestia";
+  name = "qml-caelestia";
   version = "latest";
   src = ../.;
   dontWrapQtApps = true;
   nativeBuildInputs = with pkgs; [
     cmake
-    gnumake
+    ninja
     pkg-config
+  ];
+  buildInputs = with pkgs; [
     qt6.qtbase
+    qt6.qtdeclarative
     qt6.qtwayland
     libqalculate
     pipewire
@@ -16,13 +19,9 @@ pkgs.stdenv.mkDerivation {
     libcava
     fftw
   ];
-  outputs = ["out"];
-  buildPhase = ''
-    cmake .
-    make
-  '';
-  installPhase = ''
-    mkdir -p $out/lib/qml
-    cp -r Niri $out/lib/qml
-  '';
+  cmakeFlags = with pkgs;
+    [
+      (lib.cmakeFeature "ENABLE_MODULES" "plugin")
+      (lib.cmakeFeature "INSTALL_QMLDIR" qt6.qtbase.qtQmlPrefix)
+    ];
 }
