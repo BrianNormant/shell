@@ -67,7 +67,7 @@ StyledRect {
         }
 
         Component.onCompleted: {
-            IdleInhibitor.enabled = false;
+            IdleInhibitor.enabled = true;
         }
     }
 
