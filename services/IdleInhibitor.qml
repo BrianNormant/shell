@@ -32,9 +32,6 @@ Singleton {
             color: "transparent"
             mask: Region {}
         }
-        Component.onCompleted: {
-            IpcHandler.toggle();
-        }
     }
 
     IpcHandler {

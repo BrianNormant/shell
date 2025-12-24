@@ -65,6 +65,10 @@ StyledRect {
             checked: IdleInhibitor.enabled
             onToggled: IdleInhibitor.enabled = checked
         }
+
+        Component.onCompleted: {
+            IdleInhibitor.enabled = false;
+        }
     }
 
     Loader {
